@@ -1,5 +1,5 @@
 package com.registroconferencias.enumerate;
 
 public enum Rol {
-    ADMIN, GESTOR
+    ADMIN, GESTOR, PROPIETARIO, PARTICIPANTE
 }
