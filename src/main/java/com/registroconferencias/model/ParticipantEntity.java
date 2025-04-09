@@ -22,9 +22,6 @@ public class ParticipantEntity {
     @Column(nullable = false, length = 60)
     private String lastname;
 
-    @Column(nullable = false, length = 15)
-    private String phone;
-
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserEntity user;
