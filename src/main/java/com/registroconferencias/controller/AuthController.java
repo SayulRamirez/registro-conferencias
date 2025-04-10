@@ -2,6 +2,7 @@ package com.registroconferencias.controller;
 
 import com.registroconferencias.dto.auth.LoginRequest;
 import com.registroconferencias.dto.auth.LoginResponse;
+import com.registroconferencias.dto.auth.RegisterAdminRequest;
 import com.registroconferencias.dto.auth.RegisterRequest;
 import com.registroconferencias.services.AuthService;
 import jakarta.validation.Valid;
@@ -28,6 +29,11 @@ public class AuthController {
 
     @PostMapping
     public ResponseEntity<String> register(@Valid @RequestBody RegisterRequest request) {
+        return ResponseEntity.ok(authService.register(request));
+    }
+
+    @PostMapping(value = "admin")
+    public ResponseEntity<String> registerAdmin(RegisterAdminRequest request) {
         return ResponseEntity.ok(authService.register(request));
     }
 }

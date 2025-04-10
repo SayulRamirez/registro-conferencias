@@ -2,6 +2,7 @@ package com.registroconferencias.services;
 
 import com.registroconferencias.dto.auth.LoginRequest;
 import com.registroconferencias.dto.auth.LoginResponse;
+import com.registroconferencias.dto.auth.RegisterAdminRequest;
 import com.registroconferencias.dto.auth.RegisterRequest;
 import com.registroconferencias.enumerate.Rol;
 import com.registroconferencias.model.ParticipantEntity;
@@ -42,6 +43,20 @@ public class AuthServiceImpl implements AuthService {
                         request.password(),
                         Rol.PARTICIPANTE,
                         true)));
+
+        return "Registro exitoso";
+    }
+
+    @Override
+    public String register(RegisterAdminRequest request) {
+        if (userRepository.existsByEmail(request.email()))
+            throw new EntityExistsException("El correo ya se encuentra registrado");
+
+        userRepository.save(
+                new UserEntity(null, request.email(),
+                        request.password(),
+                        Rol.ADMIN,
+                        true));
 
         return "Registro exitoso";
     }
