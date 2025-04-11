@@ -11,11 +11,13 @@ import com.registroconferencias.repositories.RegisterParticipantsRepository;
 import com.registroconferencias.repositories.SessionRepository;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public class RegisterParticipantsSeviceImpl implements RegisterParticipantsService {
 
     private final RegisterParticipantsRepository registerRepository;
@@ -81,7 +83,7 @@ public class RegisterParticipantsSeviceImpl implements RegisterParticipantsServi
         RegisterParticipantsEntity register = registerRepository.findByParticipantId(participant.id_participant())
                 .orElseThrow(() -> new EntityNotFoundException("No se encontro el participante con id: " + participant.id_participant()));
 
-        register.setAttended(participant.attended() == null ? false : participant.attended());
+        register.setAttended(participant.attended() != null && participant.attended());
 
         registerRepository.save(register);
 
