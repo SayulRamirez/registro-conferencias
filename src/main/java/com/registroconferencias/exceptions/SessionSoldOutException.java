@@ -1,7 +1,7 @@
 package com.registroconferencias.exceptions;
 
-public class EntityNotSaveException extends RuntimeException {
-    public EntityNotSaveException(String message) {
+public class SessionSoldOutException extends RuntimeException {
+    public SessionSoldOutException(String message) {
         super(message);
     }
 

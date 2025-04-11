@@ -34,6 +34,8 @@ public class SessionEntity {
     @Column(name = "register_date")
     private LocalDateTime registerDate;
 
+    private Long capacity;
+
     @Column(name = "sold_out")
     private boolean soldOut;
 
@@ -41,7 +43,7 @@ public class SessionEntity {
     }
 
     public SessionEntity
-            (Long id, RoomEntity room, LocalDate date, LocalTime startTime, boolean active, String title, String description, LocalDateTime registerDate, boolean soldOut) {
+            (Long id, RoomEntity room, LocalDate date, LocalTime startTime, boolean active, String title, String description, LocalDateTime registerDate,Long capacity, boolean soldOut) {
         this.id = id;
         this.room = room;
         this.date = date;
@@ -50,6 +52,7 @@ public class SessionEntity {
         this.title = title;
         this.description = description;
         this.registerDate = registerDate;
+        this.capacity = capacity;
         this.soldOut = soldOut;
     }
 

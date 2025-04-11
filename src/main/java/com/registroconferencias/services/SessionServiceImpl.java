@@ -43,6 +43,7 @@ public class SessionServiceImpl implements SessionService {
                 session.title(),
                 session.description(),
                 now,
+                room.getCapacity(),
                 false));
 
         return "Registro de la sesión exitoso";
