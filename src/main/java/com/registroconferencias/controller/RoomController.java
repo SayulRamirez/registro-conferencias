@@ -1,10 +1,9 @@
 package com.registroconferencias.controller;
 
-import com.registroconferencias.dto.room.Room;
+import com.registroconferencias.dto.Room;
 import com.registroconferencias.services.RoomService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

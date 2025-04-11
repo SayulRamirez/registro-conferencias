@@ -1,6 +1,6 @@
 package com.registroconferencias.services;
 
-import com.registroconferencias.dto.room.Room;
+import com.registroconferencias.dto.Room;
 
 import java.util.List;
 

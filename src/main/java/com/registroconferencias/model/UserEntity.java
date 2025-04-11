@@ -1,6 +1,5 @@
 package com.registroconferencias.model;
 
-import com.registroconferencias.enumerate.Rol;
 import jakarta.persistence.*;
 
 @Entity

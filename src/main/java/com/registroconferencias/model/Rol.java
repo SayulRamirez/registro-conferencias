@@ -1,4 +1,4 @@
-package com.registroconferencias.enumerate;
+package com.registroconferencias.model;
 
 public enum Rol {
     ADMIN, PARTICIPANTE

@@ -1,8 +1,7 @@
-package com.registroconferencias.dto.room;
+package com.registroconferencias.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.registroconferencias.dto.Address;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;

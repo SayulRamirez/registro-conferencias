@@ -1,7 +1,7 @@
 package com.registroconferencias.services;
 
 import com.registroconferencias.dto.Address;
-import com.registroconferencias.dto.room.Room;
+import com.registroconferencias.dto.Room;
 import com.registroconferencias.model.AddressEntity;
 import com.registroconferencias.model.RoomEntity;
 import com.registroconferencias.model.UserEntity;
@@ -9,6 +9,7 @@ import com.registroconferencias.repositories.RoomRepository;
 import com.registroconferencias.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class RoomServiceImpl implements RoomService {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     @Override
     public String create(Room request) {
 
@@ -51,6 +53,7 @@ public class RoomServiceImpl implements RoomService {
         return "Registro de la nueva sala exitoso";
     }
 
+    @Transactional
     @Override
     public void delete(Long id) {
         if (!roomRepository.existsById(id)) {

@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class RegisterParticipantsSeviceImpl implements RegisterParticipantsService {
+public class RegisterParticipantsServiceImpl implements RegisterParticipantsService {
 
     private final RegisterParticipantsRepository registerRepository;
 
@@ -26,7 +26,10 @@ public class RegisterParticipantsSeviceImpl implements RegisterParticipantsServi
 
     private final SessionRepository sessionRepository;
 
-    public RegisterParticipantsSeviceImpl(RegisterParticipantsRepository registerRepository, ParticipantRepository participantRepository, SessionRepository sessionRepository) {
+    public RegisterParticipantsServiceImpl
+            (RegisterParticipantsRepository registerRepository,
+             ParticipantRepository participantRepository,
+             SessionRepository sessionRepository) {
         this.registerRepository = registerRepository;
         this.participantRepository = participantRepository;
         this.sessionRepository = sessionRepository;

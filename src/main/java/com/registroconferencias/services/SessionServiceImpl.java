@@ -9,6 +9,7 @@ import com.registroconferencias.repositories.SessionInfo;
 import com.registroconferencias.repositories.SessionRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,6 +26,7 @@ public class SessionServiceImpl implements SessionService {
         this.roomRepository = roomRepository;
     }
 
+    @Transactional
     @Override
     public String create(Session session) {
 
@@ -49,6 +51,7 @@ public class SessionServiceImpl implements SessionService {
         return "Registro de la sesión exitoso";
     }
 
+    @Transactional
     @Override
     public void delete(Long id) {
         if (sessionRepository.existsById(id))

@@ -4,13 +4,14 @@ import com.registroconferencias.dto.auth.LoginRequest;
 import com.registroconferencias.dto.auth.LoginResponse;
 import com.registroconferencias.dto.auth.RegisterAdminRequest;
 import com.registroconferencias.dto.auth.RegisterRequest;
-import com.registroconferencias.enumerate.Rol;
+import com.registroconferencias.model.Rol;
 import com.registroconferencias.model.ParticipantEntity;
 import com.registroconferencias.model.UserEntity;
 import com.registroconferencias.repositories.ParticipantRepository;
 import com.registroconferencias.repositories.UserRepository;
 import jakarta.persistence.EntityExistsException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -24,11 +25,13 @@ public class AuthServiceImpl implements AuthService {
         this.participantRepository = participantRepository;
     }
 
+    @Transactional
     @Override
     public LoginResponse login(LoginRequest request) {
         return null;
     }
 
+    @Transactional
     @Override
     public String register(RegisterRequest request) {
 
@@ -47,6 +50,7 @@ public class AuthServiceImpl implements AuthService {
         return "Registro exitoso";
     }
 
+    @Transactional
     @Override
     public String register(RegisterAdminRequest request) {
         if (userRepository.existsByEmail(request.email()))
