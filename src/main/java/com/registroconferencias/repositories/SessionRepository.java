@@ -21,7 +21,7 @@ public interface SessionRepository extends JpaRepository<SessionEntity, Long> {
             A.street, A.number, A.colony, A.zip_code, A.city, A.state
         FROM sessions S
         INNER JOIN rooms R ON S.room_id = R.id
-        INNER JOIN address A ON R.address_id = S.id
+        INNER JOIN address A ON R.address_id = A.id
         WHERE S.id = :sessionId
     """, nativeQuery = true)
     Optional<SessionInfo> findBySessionId(@Param("sessionId") Long sessionId);

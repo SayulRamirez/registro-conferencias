@@ -35,7 +35,7 @@ public class SessionServiceImpl implements SessionService {
 
         LocalDateTime now = LocalDateTime.now();
 
-        if (now.toLocalDate().isBefore(session.date()))
+        if (session.date().isBefore(now.toLocalDate()))
             throw new IllegalArgumentException("La fecha no debe de ser menor a la fehca actual: " + now);
 
         sessionRepository.save(new SessionEntity(null, room,
@@ -54,10 +54,10 @@ public class SessionServiceImpl implements SessionService {
     @Transactional
     @Override
     public void delete(Long id) {
-        if (sessionRepository.existsById(id))
-            sessionRepository.deleteById(id);
+        if (!sessionRepository.existsById(id))
+            throw new EntityNotFoundException("No se encontro la sala a eliminar con el id: " + id);
 
-        throw new EntityNotFoundException("No se encontro la sala a eliminar con el id: " + id);
+        sessionRepository.deleteById(id);
     }
 
     @Override

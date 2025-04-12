@@ -22,7 +22,7 @@ public record Session (
         String name_room,
 
         @NotNull(message = "la fecha del evento es requerida")
-        @JsonFormat(pattern = "yyyy:MM:dd")
+        @JsonFormat(pattern = "yyyy-MM-dd")
         LocalDate date,
 
         @NotNull(message = "la hora de inicio del evento es requerida")
@@ -30,11 +30,11 @@ public record Session (
         LocalTime start_time,
 
         @NotNull(message = "el titulo de la sessión es requerido")
-        @Size(message = "el titulo de la sessión debe de tener entre 5 y 50 caracteres", min = 5, max = 50)
+        @Size(message = "el titulo de la sessión debe de tener entre 5 y 100 caracteres", min = 5, max = 100)
         String title,
 
         @NotNull(message = "la descripción de la sessión es requerido")
-        @Size(message = "la descripción de la sessión debe de tener entre 5 y 50 caracteres", min = 5, max = 50)
+        @Size(message = "la descripción de la sessión debe de tener entre 5 y 200 caracteres", min = 5, max = 200)
         String description,
 
         boolean sold_out,

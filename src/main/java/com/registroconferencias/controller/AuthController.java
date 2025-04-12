@@ -33,7 +33,7 @@ public class AuthController {
     }
 
     @PostMapping(value = "admin")
-    public ResponseEntity<String> registerAdmin(RegisterAdminRequest request) {
+    public ResponseEntity<String> registerAdmin(@Valid @RequestBody RegisterAdminRequest request) {
         return ResponseEntity.ok(authService.register(request));
     }
 }

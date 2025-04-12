@@ -70,11 +70,11 @@ public class RegisterParticipantsServiceImpl implements RegisterParticipantsServ
     @Override
     public List<ParticipantResponse> getParticipants(Long idSession) {
 
-        return registerRepository.findAllBySessionId(idSession).stream()
-                .map(participant -> new ParticipantResponse(participant.getId(),
-                        participant.getParticipant().getName(),
-                        participant.getParticipant().getLastname(),
-                        participant.isAttended(),
+        return registerRepository.findAllParticipantsBySessionId(idSession).stream()
+                .map(participant -> new ParticipantResponse(participant.getIdParticipant(),
+                        participant.getName(),
+                        participant.getLastname(),
+                        participant.getAttended(),
                         participant.getRegisterDate()))
                 .toList();
     }
@@ -83,7 +83,11 @@ public class RegisterParticipantsServiceImpl implements RegisterParticipantsServ
     @Override
     public String markAttendance(Participant participant) {
 
-        RegisterParticipantsEntity register = registerRepository.findByParticipantId(participant.id_participant())
+        if (!sessionRepository.existsById(participant.id_session()))
+            throw new EntityNotFoundException("No se encontro la sesión");
+
+        RegisterParticipantsEntity register = registerRepository
+                .findByParticipantIdAndSessionId(participant.id_participant(), participant.id_session())
                 .orElseThrow(() -> new EntityNotFoundException("No se encontro el participante con id: " + participant.id_participant()));
 
         register.setAttended(participant.attended() != null && participant.attended());
