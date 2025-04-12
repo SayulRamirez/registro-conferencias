@@ -1,3 +1,3 @@
 package com.registroconferencias.dto.auth;
 
-public record LoginResponse (String token){}
+public record LoginResponse (Long id, String rol){}

@@ -4,12 +4,14 @@ import com.registroconferencias.dto.auth.LoginRequest;
 import com.registroconferencias.dto.auth.LoginResponse;
 import com.registroconferencias.dto.auth.RegisterAdminRequest;
 import com.registroconferencias.dto.auth.RegisterRequest;
+import com.registroconferencias.exceptions.UserNotActive;
 import com.registroconferencias.model.Rol;
 import com.registroconferencias.model.ParticipantEntity;
 import com.registroconferencias.model.UserEntity;
 import com.registroconferencias.repositories.ParticipantRepository;
 import com.registroconferencias.repositories.UserRepository;
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +30,14 @@ public class AuthServiceImpl implements AuthService {
     @Transactional
     @Override
     public LoginResponse login(LoginRequest request) {
-        return null;
+
+        UserEntity userEntity = userRepository.findByEmailAndPassword(request.email(), request.password())
+                .orElseThrow(() -> new EntityNotFoundException("el usuario o contraseña son incorrectos"));
+
+        if (!userEntity.isActive())
+            throw new UserNotActive("el usuario no esta activo");
+
+        return new LoginResponse(userEntity.getId(), userEntity.getRol().toString());
     }
 
     @Transactional
