@@ -1,9 +1,6 @@
 package com.registroconferencias.controller;
 
-import com.registroconferencias.dto.auth.LoginRequest;
-import com.registroconferencias.dto.auth.LoginResponse;
-import com.registroconferencias.dto.auth.RegisterAdminRequest;
-import com.registroconferencias.dto.auth.RegisterRequest;
+import com.registroconferencias.dto.auth.*;
 import com.registroconferencias.services.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +20,7 @@ public class AuthController {
     }
 
     @PostMapping(value = "login")
-    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.login(request));
     }
 
