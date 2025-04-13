@@ -1,13 +1,10 @@
 package com.registroconferencias.services;
 
-import com.registroconferencias.dto.auth.LoginRequest;
-import com.registroconferencias.dto.auth.LoginResponse;
-import com.registroconferencias.dto.auth.RegisterAdminRequest;
-import com.registroconferencias.dto.auth.RegisterRequest;
+import com.registroconferencias.dto.auth.*;
 
 public interface AuthService {
 
-    LoginResponse login(LoginRequest request);
+    AuthResponse login(LoginRequest request);
 
     String register(RegisterRequest request);
 
