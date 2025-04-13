@@ -46,7 +46,6 @@ public class AuthServiceImpl implements AuthService {
 
         UserEntity user = userRepository.findByEmail(request.email())
                 .orElseThrow(() -> new EntityNotFoundException("el usuario no fue encontrado"));
-        System.out.println("Usuario: " + user);
 
         if (!user.isActive())
             throw new UserNotActive("el usuario no esta activo");
