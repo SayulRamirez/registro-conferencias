@@ -1,7 +1,7 @@
 package com.registroconferencias.services;
 
-import com.registroconferencias.dto.register.participant.ParticipantResponse;
-import com.registroconferencias.dto.register.participant.Participant;
+import com.registroconferencias.dto.ParticipantResponse;
+import com.registroconferencias.dto.Participant;
 
 import java.util.List;
 

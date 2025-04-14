@@ -1,4 +1,4 @@
-package com.registroconferencias.repositories;
+package com.registroconferencias.repositories.projections;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

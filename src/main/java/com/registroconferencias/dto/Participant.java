@@ -1,4 +1,4 @@
-package com.registroconferencias.dto.register.participant;
+package com.registroconferencias.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotNull;

@@ -5,7 +5,7 @@ import com.registroconferencias.dto.Session;
 import com.registroconferencias.model.RoomEntity;
 import com.registroconferencias.model.SessionEntity;
 import com.registroconferencias.repositories.RoomRepository;
-import com.registroconferencias.repositories.SessionInfo;
+import com.registroconferencias.repositories.projections.SessionInfo;
 import com.registroconferencias.repositories.SessionRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;

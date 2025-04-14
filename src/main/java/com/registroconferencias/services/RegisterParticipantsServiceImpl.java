@@ -1,7 +1,7 @@
 package com.registroconferencias.services;
 
-import com.registroconferencias.dto.register.participant.ParticipantResponse;
-import com.registroconferencias.dto.register.participant.Participant;
+import com.registroconferencias.dto.ParticipantResponse;
+import com.registroconferencias.dto.Participant;
 import com.registroconferencias.exceptions.SessionSoldOutException;
 import com.registroconferencias.model.ParticipantEntity;
 import com.registroconferencias.model.RegisterParticipantsEntity;

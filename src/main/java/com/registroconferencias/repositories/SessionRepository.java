@@ -1,6 +1,7 @@
 package com.registroconferencias.repositories;
 
 import com.registroconferencias.model.SessionEntity;
+import com.registroconferencias.repositories.projections.SessionInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

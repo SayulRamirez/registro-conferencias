@@ -1,7 +1,7 @@
 package com.registroconferencias.controller;
 
-import com.registroconferencias.dto.register.participant.Participant;
-import com.registroconferencias.dto.register.participant.ParticipantResponse;
+import com.registroconferencias.dto.Participant;
+import com.registroconferencias.dto.ParticipantResponse;
 import com.registroconferencias.services.RegisterParticipantsService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
