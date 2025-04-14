@@ -8,6 +8,7 @@ import com.registroconferencias.repositories.RoomRepository;
 import com.registroconferencias.repositories.SessionInfo;
 import com.registroconferencias.repositories.SessionRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,16 +16,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class SessionServiceImpl implements SessionService {
 
     private final SessionRepository sessionRepository;
 
     private final RoomRepository roomRepository;
-
-    public SessionServiceImpl(SessionRepository sessionRepository, RoomRepository roomRepository) {
-        this.sessionRepository = sessionRepository;
-        this.roomRepository = roomRepository;
-    }
 
     @Transactional
     @Override
@@ -38,15 +35,17 @@ public class SessionServiceImpl implements SessionService {
         if (session.date().isBefore(now.toLocalDate()))
             throw new IllegalArgumentException("La fecha no debe de ser menor a la fehca actual: " + now);
 
-        sessionRepository.save(new SessionEntity(null, room,
-                session.date(),
-                session.start_time(),
-                true,
-                session.title(),
-                session.description(),
-                now,
-                room.getCapacity(),
-                false));
+        sessionRepository.save( SessionEntity.builder()
+                .room(room)
+                .date(session.date())
+                .startTime(session.start_time())
+                .active(true)
+                .title(session.title())
+                .description(session.description())
+                .registerDate(now)
+                .capacity(room.getCapacity())
+                .soldOut(false).build()
+        );
 
         return "Registro de la sesión exitoso";
     }

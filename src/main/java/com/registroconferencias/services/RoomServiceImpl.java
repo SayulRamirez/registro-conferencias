@@ -8,22 +8,19 @@ import com.registroconferencias.model.UserEntity;
 import com.registroconferencias.repositories.RoomRepository;
 import com.registroconferencias.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class RoomServiceImpl implements RoomService {
 
     private final RoomRepository roomRepository;
 
     private final UserRepository userRepository;
-
-    public RoomServiceImpl(RoomRepository roomRepository, UserRepository userRepository) {
-        this.roomRepository = roomRepository;
-        this.userRepository = userRepository;
-    }
 
     @Transactional
     @Override
@@ -35,20 +32,21 @@ public class RoomServiceImpl implements RoomService {
         UserEntity user = userRepository.findById(request.user_id())
                 .orElseThrow(() -> new EntityNotFoundException("El usuario no existe con el id: " + request.user_id()));
 
-        roomRepository.save(new RoomEntity(null,
-                request.name(),
-                request.capacity(),
-                new AddressEntity(null,
-                        request.address().street(),
-                        request.address().number(),
-                        request.address().colony(),
-                        request.address().zip_code(),
-                        request.address().city(),
-                        request.address().state()),
-                request.openingTime(),
-                request.closingTime(),
-                request.availableHours(),
-                user));
+        roomRepository.save( RoomEntity.builder()
+                .name(request.name())
+                .capacity(request.capacity())
+                .openingTime(request.openingTime())
+                .closingTime(request.closingTime())
+                .availableHours(request.availableHours())
+                .user(user)
+                .address(AddressEntity.builder()
+                        .street(request.address().street())
+                        .number(request.address().number())
+                        .colony(request.address().colony())
+                        .zipCode(request.address().zip_code())
+                        .city(request.address().city())
+                        .state(request.address().state()).build()).build()
+        );
 
         return "Registro de la nueva sala exitoso";
     }
@@ -99,6 +97,7 @@ public class RoomServiceImpl implements RoomService {
                         room.getAddress().getZipCode(),
                         room.getAddress().getCity(),
                         room.getAddress().getState()
-                ));
+                )
+        );
     }
 }

@@ -3,6 +3,7 @@ package com.registroconferencias.controller;
 import com.registroconferencias.dto.Room;
 import com.registroconferencias.services.RoomService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,13 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/room")
+@RequiredArgsConstructor
 public class RoomController {
 
     private final RoomService roomService;
-
-    public RoomController(RoomService roomService) {
-        this.roomService = roomService;
-    }
 
     @PostMapping
     public ResponseEntity<String> create(@Valid @RequestBody Room request) {

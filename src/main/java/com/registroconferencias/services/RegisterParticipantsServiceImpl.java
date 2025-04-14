@@ -11,6 +11,7 @@ import com.registroconferencias.repositories.RegisterParticipantsRepository;
 import com.registroconferencias.repositories.SessionRepository;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class RegisterParticipantsServiceImpl implements RegisterParticipantsService {
 
     private final RegisterParticipantsRepository registerRepository;
@@ -25,15 +27,6 @@ public class RegisterParticipantsServiceImpl implements RegisterParticipantsServ
     private final ParticipantRepository participantRepository;
 
     private final SessionRepository sessionRepository;
-
-    public RegisterParticipantsServiceImpl
-            (RegisterParticipantsRepository registerRepository,
-             ParticipantRepository participantRepository,
-             SessionRepository sessionRepository) {
-        this.registerRepository = registerRepository;
-        this.participantRepository = participantRepository;
-        this.sessionRepository = sessionRepository;
-    }
 
     @Transactional
     @Override
@@ -51,11 +44,12 @@ public class RegisterParticipantsServiceImpl implements RegisterParticipantsServ
         ParticipantEntity participantEntity = participantRepository.findById(participant.id_participant())
                 .orElseThrow(() -> new EntityNotFoundException("No se encontro el participante con id: " + participant.id_participant()));
 
-        registerRepository.save(new RegisterParticipantsEntity(null,
-                participantEntity,
-                session,
-                LocalDateTime.now(),
-                false));
+        registerRepository.save( RegisterParticipantsEntity.builder()
+                .participant(participantEntity)
+                .session(session)
+                .registerDate(LocalDateTime.now())
+                .attended(false).build()
+        );
 
         Long availableSpaces = registerRepository.availableSpaces(participant.id_session());
 

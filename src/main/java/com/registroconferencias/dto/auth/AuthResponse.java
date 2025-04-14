@@ -1,4 +1,3 @@
 package com.registroconferencias.dto.auth;
 
-public record AuthResponse (String token){
-}
+public record AuthResponse (String token){}

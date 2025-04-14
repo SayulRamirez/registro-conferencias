@@ -10,15 +10,15 @@ import com.registroconferencias.repositories.ParticipantRepository;
 import com.registroconferencias.repositories.UserRepository;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
+@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
     private final JwtService jwtService;
@@ -30,14 +30,6 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
 
     private final ParticipantRepository participantRepository;
-
-    public AuthServiceImpl(JwtService jwtService, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, UserRepository userRepository, ParticipantRepository participantRepository) {
-        this.jwtService = jwtService;
-        this.authenticationManager = authenticationManager;
-        this.passwordEncoder = passwordEncoder;
-        this.userRepository = userRepository;
-        this.participantRepository = participantRepository;
-    }
 
     @Override
     public AuthResponse login(LoginRequest request) {
@@ -62,14 +54,16 @@ public class AuthServiceImpl implements AuthService {
         if (userRepository.existsByEmail(request.email()))
             throw new EntityExistsException("El correo ya se encuentra registrado");
 
-        participantRepository.save(new ParticipantEntity(null,
-                request.name(),
-                request.lastname(),
-                new UserEntity(null,
-                        request.email(),
-                        passwordEncoder.encode(request.password()),
-                        Rol.PARTICIPANTE,
-                        true)));
+        participantRepository.save(ParticipantEntity.builder()
+                .name(request.name())
+                .lastname(request.lastname())
+                .user( UserEntity.builder()
+                        .email(request.email())
+                        .password(passwordEncoder.encode(request.password()))
+                        .rol(Rol.PARTICIPANTE)
+                        .active(true).build())
+                .build()
+        );
 
         return "Registro exitoso";
     }
@@ -80,11 +74,13 @@ public class AuthServiceImpl implements AuthService {
         if (userRepository.existsByEmail(request.email()))
             throw new EntityExistsException("El correo ya se encuentra registrado");
 
-        userRepository.save(
-                new UserEntity(null, request.email(),
-                        passwordEncoder.encode(request.password()),
-                        Rol.ADMIN,
-                        true));
+        userRepository.save( UserEntity.builder()
+                .email(request.email())
+                .password(passwordEncoder.encode(request.password()))
+                .rol(Rol.ADMIN)
+                .active(true)
+                .build()
+        );
 
         return "Registro exitoso";
     }

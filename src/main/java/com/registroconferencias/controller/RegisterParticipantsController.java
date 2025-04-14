@@ -4,6 +4,7 @@ import com.registroconferencias.dto.register.participant.Participant;
 import com.registroconferencias.dto.register.participant.ParticipantResponse;
 import com.registroconferencias.services.RegisterParticipantsService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,13 +13,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/participant")
+@RequiredArgsConstructor
 public class RegisterParticipantsController {
 
     private final RegisterParticipantsService registerService;
-
-    public RegisterParticipantsController(RegisterParticipantsService registerService) {
-        this.registerService = registerService;
-    }
 
     @PostMapping
     public ResponseEntity<String> register(@Valid @RequestBody Participant request) {
