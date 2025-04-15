@@ -39,7 +39,7 @@ public class SecurityConfig {
 
                     .requestMatchers(HttpMethod.POST, "/api/v1/room").hasAuthority(Rol.ADMIN.toString())
                     .requestMatchers(HttpMethod.DELETE, "/api/v1/room/{id}").hasAuthority(Rol.ADMIN.toString())
-                    .requestMatchers(HttpMethod.GET, "/api/v1/room/all/{idUser}").authenticated()
+                    .requestMatchers(HttpMethod.GET, "/api/v1/room").authenticated()
                     .requestMatchers(HttpMethod.GET, "/api/v1/room/{idRoom}").authenticated()
 
                     .requestMatchers(HttpMethod.POST, "/api/v1/session").hasAuthority(Rol.ADMIN.toString())

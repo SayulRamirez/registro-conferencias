@@ -10,7 +10,7 @@ public interface RoomService {
 
     void delete(Long id);
 
-    List<Room> getAll(Long idUser);
+    List<Room> getAll();
 
     Room get(Long idRoom);
 }

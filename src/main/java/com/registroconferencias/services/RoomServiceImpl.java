@@ -62,11 +62,11 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<Room> getAll(Long idUser) {
+    public List<Room> getAll() {
 
-        List<RoomEntity> rooms = roomRepository.findAllByUserId(idUser);
+        List<RoomEntity> rooms = roomRepository.findAll();
 
-        if (rooms.isEmpty()) throw new EmptyResultException("no se encontraron salas activas");
+        if (rooms.isEmpty()) throw new EmptyResultException("no se encontraron salas");
 
         return rooms.stream().map(room ->
                 new Room(room.getId(),

@@ -28,9 +28,9 @@ public class RoomController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping(value = "all/{idUser}")
-    public ResponseEntity<List<Room>> getAll(@PathVariable Long idUser) {
-        return ResponseEntity.ok(roomService.getAll(idUser));
+    @GetMapping(value = "")
+    public ResponseEntity<List<Room>> getAll() {
+        return ResponseEntity.ok(roomService.getAll());
     }
 
     @GetMapping(value = "{idRoom}")
