@@ -1,8 +1,8 @@
 package com.registroconferencias.exceptions;
 
-public class UserNotActive extends RuntimeException {
+public class UserNotActiveException extends RuntimeException {
 
-    public UserNotActive(String message) {
+    public UserNotActiveException(String message) {
         super(message);
     }
 

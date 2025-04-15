@@ -62,7 +62,7 @@ public class RegisterParticipantsServiceImpl implements RegisterParticipantsServ
     }
 
     @Override
-    public List<ParticipantResponse> getParticipants(Long idSession) {
+    public List<ParticipantResponse> getAll(Long idSession) {
 
         return registerRepository.findAllParticipantsBySessionId(idSession).stream()
                 .map(participant -> new ParticipantResponse(participant.getIdParticipant(),

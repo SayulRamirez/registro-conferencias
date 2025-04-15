@@ -2,6 +2,8 @@ package com.registroconferencias.services;
 
 import com.registroconferencias.dto.Address;
 import com.registroconferencias.dto.Session;
+import com.registroconferencias.exceptions.DateNotValidException;
+import com.registroconferencias.exceptions.EmptyResultException;
 import com.registroconferencias.model.RoomEntity;
 import com.registroconferencias.model.SessionEntity;
 import com.registroconferencias.repositories.RoomRepository;
@@ -33,7 +35,7 @@ public class SessionServiceImpl implements SessionService {
         LocalDateTime now = LocalDateTime.now();
 
         if (session.date().isBefore(now.toLocalDate()))
-            throw new IllegalArgumentException("La fecha no debe de ser menor a la fehca actual: " + now);
+            throw new DateNotValidException("La fecha no debe de ser menor a la fehca actual: " + now);
 
         sessionRepository.save( SessionEntity.builder()
                 .room(room)
@@ -62,7 +64,11 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public List<Session> getAll(Long idRoom) {
 
-        return sessionRepository.findAllByRoomId(idRoom).stream()
+        List<SessionEntity> sessions = sessionRepository.findAllByRoomId(idRoom);
+
+        if (sessions.isEmpty()) throw new EmptyResultException("no se encontraron salas");
+
+        return sessions.stream()
                 .map(session -> new Session(session.getId(),
                         session.getRoom().getId(),
                         session.getRoom().getName(),

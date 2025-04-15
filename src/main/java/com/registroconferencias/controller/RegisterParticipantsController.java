@@ -25,12 +25,7 @@ public class RegisterParticipantsController {
 
     @GetMapping(value = "{idSession}")
     public ResponseEntity<List<ParticipantResponse>> getAll(@PathVariable Long idSession) {
-        List<ParticipantResponse> participants = registerService.getParticipants(idSession);
-
-        if (participants.isEmpty())
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-
-        return ResponseEntity.ok(participants);
+        return ResponseEntity.ok(registerService.getAll(idSession));
     }
 
     @PutMapping

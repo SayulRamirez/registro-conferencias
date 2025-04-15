@@ -2,6 +2,7 @@ package com.registroconferencias.services;
 
 import com.registroconferencias.dto.Address;
 import com.registroconferencias.dto.Room;
+import com.registroconferencias.exceptions.EmptyResultException;
 import com.registroconferencias.model.AddressEntity;
 import com.registroconferencias.model.RoomEntity;
 import com.registroconferencias.model.UserEntity;
@@ -27,7 +28,7 @@ public class RoomServiceImpl implements RoomService {
     public String create(Room request) {
 
         if (request.address() == null)
-            throw new IllegalArgumentException("La dirección es requerida");
+            throw new NullPointerException("La dirección es requerida");
 
         UserEntity user = userRepository.findById(request.user_id())
                 .orElseThrow(() -> new EntityNotFoundException("El usuario no existe con el id: " + request.user_id()));
@@ -65,7 +66,7 @@ public class RoomServiceImpl implements RoomService {
 
         List<RoomEntity> rooms = roomRepository.findAllByUserId(idUser);
 
-        if (rooms.isEmpty()) return List.of();
+        if (rooms.isEmpty()) throw new EmptyResultException("no se encontraron salas activas");
 
         return rooms.stream().map(room ->
                 new Room(room.getId(),

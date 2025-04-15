@@ -1,7 +1,7 @@
 package com.registroconferencias.services;
 
 import com.registroconferencias.dto.auth.*;
-import com.registroconferencias.exceptions.UserNotActive;
+import com.registroconferencias.exceptions.UserNotActiveException;
 import com.registroconferencias.jwt.JwtService;
 import com.registroconferencias.model.Rol;
 import com.registroconferencias.model.ParticipantEntity;
@@ -40,7 +40,7 @@ public class AuthServiceImpl implements AuthService {
                 .orElseThrow(() -> new EntityNotFoundException("el usuario no fue encontrado"));
 
         if (!user.isActive())
-            throw new UserNotActive("el usuario no esta activo");
+            throw new UserNotActiveException("el usuario no esta activo");
 
         String token = jwtService.getToken(user);
 

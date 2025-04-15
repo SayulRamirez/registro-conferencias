@@ -31,14 +31,7 @@ public class SessionController {
 
     @GetMapping(value = "all/{idRoom}")
     public ResponseEntity<List<Session>> getAll(@PathVariable Long idRoom) {
-
-        List<Session> sessions = sessionService.getAll(idRoom);
-        if (sessions.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                    .body(List.of());
-        }
-
-        return ResponseEntity.ok(sessions);
+        return ResponseEntity.ok(sessionService.getAll(idRoom));
     }
 
     @GetMapping(value = "{idSession}")

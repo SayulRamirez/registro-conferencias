@@ -9,7 +9,7 @@ public interface RegisterParticipantsService {
 
     String register(Participant participant);
 
-    List<ParticipantResponse> getParticipants(Long idSession);
+    List<ParticipantResponse> getAll(Long idSession);
 
     String markAttendance(Participant participant);
 }
