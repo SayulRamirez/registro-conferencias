@@ -10,17 +10,27 @@ Para entrar a la documentación y poder probar la API facilmente tienes que:
 3. Para probar la API en la carpeta superior a la raiz de este proyecto se encuentra un documento el cual contiene datos para probar los enpoints.
 
 Para usar docker necesitas:
-1. Tener instalado docker
-2. Abrir una terminal el el directorio C:/ruta_de_tu_equipo/entregable-conferencia
-3. Construir la imágen con el comando:
+1. Situarte en el directorio del proyecto y realizar la accion de Maven -> clean para ello puedes abrir
+la termminal y ejecutar el comando:
+````
+mvn clean
+````
+2. Posteriormente debes de crear el ejecutable del proyecto realizando Maven -> install igualente puedes abrir
+una terminal y escribir:
+````
+mvn install -DskipTests 
+````
+3. Tener instalado docker
+4. Abrir una terminal el el directorio C:/ruta_de_tu_equipo/entregable-conferencia
+5. Construir la imágen con el comando:
 `````
 docker-compose build
 `````
-4. Levantar el contenedor con el comando:
+6. Levantar el contenedor con el comando:
 ````
 docker-compose up
 ````
-5. Finalmente se iniciara la aplicación y podrás probarla en swagger, postman o alguna otra aplicación.
+7. Finalmente se iniciara la aplicación y podrás probarla en swagger, postman o alguna otra aplicación.
 
 > [!NOTE] <br>
 > Además para las pruebas la API tiene un admin predeterminado con las credenciales 
