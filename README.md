@@ -9,7 +9,20 @@ Para entrar a la documentación y poder probar la API facilmente tienes que:
 2. Una vez iniciado debes ingresar la siguiente ruta en el navegador: http://localhost:8080/swagger-ui/index.html
 3. Para probar la API en la carpeta superior a la raiz de este proyecto se encuentra un documento el cual contiene datos para probar los enpoints.
 
-> [!NOTE]
+Para usar docker necesitas:
+1. Tener instalado docker
+2. Abrir una terminal el el directorio C:/ruta_de_tu_equipo/entregable-conferencia
+3. Construir la imágen con el comando:
+`````
+docker-compose build
+`````
+4. Levantar el contenedor con el comando:
+````
+docker-compose up
+````
+5. Finalmente se iniciara la aplicación y podrás probarla en swagger, postman o alguna otra aplicación.
+
+> [!NOTE] <br>
 > Además para las pruebas la API tiene un admin predeterminado con las credenciales 
 > que se encuentran en el archivo:
 > entregable-conferencia/credenciales-admin-root.txt
@@ -18,16 +31,14 @@ Para entrar a la documentación y poder probar la API facilmente tienes que:
 
 El entregable contiene la siguiente estructura:
 
-> [!IMPORTANT]
-````
-entregable-conferencia <directorio que contiene todos los recursos necesarios>
-    registro-conferencias <este es el directorio del proyecto>
-    docker-compose.yml
-    datos-prueba.pdf
-    Documentación de la arquitectura de la aplicación.pdf
-    Informe diagnóstico.pdf
-    credenciales-admin-root.txt
-````
+> [!IMPORTANT] <br>
+> entregable-conferencia <directorio que contiene todos los recursos necesarios>
+> registro-conferencias <este es el directorio del proyecto>
+> docker-compose.yml
+> datos-prueba.pdf
+> Documentación de la arquitectura de la aplicación.pdf
+> Informe diagnóstico.pdf
+> credenciales-admin-root.txt
 
 Repositorio de GitHub: https://github.com/SayulRamirez/registro-conferencias
  
